@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova X Elite — Redefine Time</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050510;
+  --cyan: #00f5ff;
+  --blue: #1a6fff;
+  --violet: #7c3aed;
+  --white: #f0f4ff;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(0,245,255,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none}
+
+/* Custom Cursor */
+.cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.2s,height 0.2s;mix-blend-mode:screen}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,245,255,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.15s ease-out,width 0.2s,height 0.2s}
+body:hover .cursor{opacity:1}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 60px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(5,5,16,0.9),transparent)}
+.logo{font-family:'Orbitron',monospace;font-weight:900;font-size:18px;letter-spacing:3px;background:linear-gradient(90deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:rgba(240,244,255,0.6);text-decoration:none;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.3s}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;padding:10px 24px;border:none;border-radius:2px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;font-weight:700;transition:opacity 0.3s,transform 0.2s}
+.nav-cta:hover{opacity:0.85;transform:scale(1.03)}
+
+/* HERO */
+#hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.stars{position:absolute;inset:0;z-index:0}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d) var(--delay) infinite}
+@keyframes twinkle{0%,100%{opacity:0.2;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+.energy-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.ring{position:absolute;border-radius:50%;border:1px solid;transform:translate(-50%,-50%);animation:ringPulse var(--rd) ease-out infinite}
+@keyframes ringPulse{0%{opacity:0.6;transform:translate(-50%,-50%) scale(0.8)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.2)}}
+.hero-content{position:relative;z-index:10;text-align:center;max-width:800px;padding:0 24px}
+.hero-eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--cyan);margin-bottom:24px;opacity:0;animation:fadeUp 1s 0.3s forwards}
+.hero-title{font-family:'Orbitron',monospace;font-size:clamp(48px,8vw,96px);font-weight:900;line-height:1;margin-bottom:20px;opacity:0;animation:fadeUp 1s 0.5s forwards}
+.hero-title span{display:block;background:linear-gradient(135deg,var(--white) 0%,var(--cyan) 50%,var(--violet) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(15px,2vw,20px);color:rgba(240,244,255,0.55);font-weight:300;letter-spacing:2px;margin-bottom:48px;opacity:0;animation:fadeUp 1s 0.7s forwards}
+.hero-btns{display:flex;gap:16px;justify-content:center;opacity:0;animation:fadeUp 1s 0.9s forwards}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;padding:16px 40px;border:none;font-family:'Orbitron',monospace;font-size:12px;letter-spacing:3px;font-weight:700;cursor:pointer;border-radius:2px;transition:box-shadow 0.3s,transform 0.2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{box-shadow:0 0 40px rgba(0,245,255,0.5);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--cyan);padding:16px 40px;border:1px solid rgba(0,245,255,0.4);font-family:'Orbitron',monospace;font-size:12px;letter-spacing:3px;font-weight:700;cursor:pointer;border-radius:2px;transition:all 0.3s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{background:rgba(0,245,255,0.08);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,245,255,0.2)}
+
+/* 3D Watch */
+.watch-scene{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5}
+.watch-wrap{width:220px;height:280px;position:relative;animation:watchFloat 4s ease-in-out infinite}
+@keyframes watchFloat{0%,100%{transform:translateY(0) rotateY(0deg)}25%{transform:translateY(-18px) rotateY(8deg)}75%{transform:translateY(8px) rotateY(-8deg)}}
+.watch-body{width:180px;height:220px;margin:0 auto;position:relative}
+.watch-case{width:160px;height:190px;background:linear-gradient(145deg,#1a1a2e 0%,#0d0d1a 40%,#1a1a35 100%);border-radius:40px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 60px rgba(0,245,255,0.3),0 0 120px rgba(26,111,255,0.15),inset 0 1px 0 rgba(255,255,255,0.1),inset 0 -1px 0 rgba(0,0,0,0.5)}
+.watch-screen{width:130px;height:155px;background:linear-gradient(135deg,#080818,#0a0a2a);border-radius:30px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);overflow:hidden;box-shadow:inset 0 0 30px rgba(0,245,255,0.1)}
+.watch-glow{position:absolute;inset:0;border-radius:30px;background:linear-gradient(135deg,transparent 30%,rgba(0,245,255,0.08));pointer-events:none}
+.screen-content{padding:14px;color:#fff;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.s-time{font-family:'Orbitron',monospace;font-size:32px;font-weight:700;text-align:center;background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.s-date{font-size:9px;text-align:center;color:rgba(255,255,255,0.4);letter-spacing:2px;margin-top:4px}
+.s-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.metric{background:rgba(255,255,255,0.05);border-radius:8px;padding:6px;text-align:center;border:0.5px solid rgba(0,245,255,0.15)}
+.metric-val{font-size:13px;font-weight:600;color:var(--cyan)}
+.metric-lbl{font-size:7px;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase}
+.s-bar{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;margin-top:6px}
+.s-bar-fill{height:100%;width:72%;background:linear-gradient(90deg,var(--cyan),var(--blue));border-radius:2px;animation:barPulse 2s ease-in-out infinite}
+@keyframes barPulse{0%,100%{opacity:0.7}50%{opacity:1}}
+.watch-strap{position:absolute;left:50%;transform:translateX(-50%);width:56px;background:linear-gradient(to bottom,#151528,#0a0a1a)}
+.watch-strap.top{top:-70px;height:75px;border-radius:8px 8px 0 0}
+.watch-strap.bottom{bottom:-70px;height:75px;border-radius:0 0 8px 8px}
+.strap-line{width:100%;height:1px;background:rgba(255,255,255,0.08);margin-bottom:10px}
+.watch-btn{position:absolute;right:-8px;top:40%;transform:translateY(-50%);width:6px;height:28px;background:linear-gradient(to bottom,#2a2a4a,#151528);border-radius:3px;box-shadow:2px 0 8px rgba(0,0,0,0.5)}
+.edge-glow{position:absolute;inset:-1px;border-radius:41px;background:transparent;border:1px solid transparent;background-clip:padding-box;box-shadow:0 0 20px rgba(0,245,255,0.4),0 0 60px rgba(26,111,255,0.2)}
+.floating-ui{position:absolute;background:rgba(10,10,30,0.7);border:0.5px solid rgba(0,245,255,0.25);border-radius:12px;padding:10px 14px;backdrop-filter:blur(12px);white-space:nowrap;font-size:11px;font-weight:600}
+.floating-ui.heart{top:-20px;right:-80px;color:#ff6b8a;animation:floatCard 3s ease-in-out infinite}
+.floating-ui.steps{bottom:20px;left:-90px;color:var(--cyan);animation:floatCard 3.5s ease-in-out infinite 0.5s}
+.floating-ui.notif{top:60px;left:-100px;color:#a78bfa;animation:floatCard 2.8s ease-in-out infinite 1s}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fi-icon{margin-right:6px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* FEATURES */
+#features{padding:140px 60px;position:relative}
+.section-eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--cyan);text-align:center;margin-bottom:16px}
+.section-title{font-family:'Orbitron',monospace;font-size:clamp(28px,4vw,48px);font-weight:700;text-align:center;margin-bottom:80px;line-height:1.2}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+.feat-card{background:var(--glass);border:0.5px solid var(--glass-border);border-radius:16px;padding:36px;transition:all 0.4s;position:relative;overflow:hidden;cursor:default}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity 0.4s}
+.feat-card:hover{transform:translateY(-8px);border-color:rgba(0,245,255,0.4);box-shadow:0 20px 60px rgba(0,245,255,0.1),0 0 0 1px rgba(0,245,255,0.1)}
+.feat-card:hover::before{opacity:1}
+.feat-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;position:relative}
+.feat-icon::after{content:'';position:absolute;inset:0;border-radius:14px;opacity:0.3}
+.fi-heart .feat-icon{background:rgba(255,107,138,0.12);box-shadow:0 0 20px rgba(255,107,138,0.2)}
+.fi-sleep .feat-icon{background:rgba(124,58,237,0.12);box-shadow:0 0 20px rgba(124,58,237,0.2)}
+.fi-fit .feat-icon{background:rgba(0,245,255,0.1);box-shadow:0 0 20px rgba(0,245,255,0.15)}
+.fi-notif .feat-icon{background:rgba(26,111,255,0.12);box-shadow:0 0 20px rgba(26,111,255,0.2)}
+.feat-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:10px}
+.feat-desc{font-size:14px;color:rgba(240,244,255,0.5);line-height:1.7;font-weight:300}
+.feat-tag{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;border:0.5px solid rgba(0,245,255,0.3);padding:4px 10px;border-radius:2px}
+
+/* COLORS */
+#showcase{padding:140px 60px;position:relative;overflow:hidden}
+.showcase-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.color-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,244,255,0.4);margin-bottom:8px}
+.color-name{font-family:'Orbitron',monospace;font-size:36px;font-weight:700;margin-bottom:16px;transition:color 0.4s}
+.color-desc{font-size:15px;color:rgba(240,244,255,0.5);line-height:1.8;font-weight:300}
+.color-swatches{display:flex;gap:12px;margin-top:32px}
+.cswatch{width:44px;height:44px;border-radius:50%;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;border:2px solid transparent}
+.cswatch.active,.cswatch:hover{transform:scale(1.2)}
+.cswatch.obsidian{background:linear-gradient(135deg,#1a1a2e,#2a2a4a)}
+.cswatch.silver{background:linear-gradient(135deg,#c0c8d8,#8a96a8)}
+.cswatch.gold{background:linear-gradient(135deg,#d4a843,#b8860b)}
+.watch-showcase{position:relative;display:flex;justify-content:center;align-items:center}
+.big-watch{width:200px;height:250px;position:relative;transition:all 0.6s ease;animation:watchFloat2 5s ease-in-out infinite}
+@keyframes watchFloat2{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-15px) rotate(3deg)}}
+.big-case{width:170px;height:200px;border-radius:40px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:background 0.6s,box-shadow 0.6s}
+.case-obsidian{background:linear-gradient(145deg,#1a1a2e,#0d0d1a,#1a1a35);box-shadow:0 0 80px rgba(0,245,255,0.3),0 30px 80px rgba(0,0,0,0.8)}
+.case-silver{background:linear-gradient(145deg,#c0c8d8,#8a96a8,#b0b8c8);box-shadow:0 0 80px rgba(192,200,216,0.3),0 30px 80px rgba(0,0,0,0.6)}
+.case-gold{background:linear-gradient(145deg,#d4a843,#b8860b,#c9962a);box-shadow:0 0 80px rgba(212,168,67,0.4),0 30px 80px rgba(0,0,0,0.6)}
+.big-screen{width:138px;height:163px;background:#080818;border-radius:30px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bs-time{font-family:'Orbitron',monospace;font-size:36px;font-weight:700;background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.big-strap{position:absolute;left:50%;transform:translateX(-50%);width:60px;background:linear-gradient(to bottom,#101020,#0a0a18)}
+.big-strap.top{top:-65px;height:70px;border-radius:8px 8px 0 0}
+.big-strap.bottom{bottom:-65px;height:70px;border-radius:0 0 8px 8px}
+
+/* PRICING */
+#pricing{padding:140px 60px;position:relative}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:960px;margin:0 auto}
+.price-card{background:var(--glass);border:0.5px solid var(--glass-border);border-radius:20px;padding:48px 36px;text-align:center;position:relative;transition:all 0.4s}
+.price-card.featured{border-color:rgba(0,245,255,0.5);background:rgba(0,245,255,0.04);box-shadow:0 0 60px rgba(0,245,255,0.1)}
+.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:2px;padding:5px 16px;border-radius:2px}
+.plan-name{font-family:'Orbitron',monospace;font-size:12px;letter-spacing:3px;color:var(--cyan);margin-bottom:24px;text-transform:uppercase}
+.plan-price{font-family:'Orbitron',monospace;font-size:52px;font-weight:900;line-height:1;margin-bottom:4px}
+.plan-price sup{font-size:20px;vertical-align:top;margin-top:12px;display:inline-block}
+.plan-period{font-size:12px;color:rgba(240,244,255,0.35);letter-spacing:2px;margin-bottom:36px}
+.plan-features{list-style:none;margin-bottom:40px;display:flex;flex-direction:column;gap:14px}
+.plan-features li{font-size:14px;color:rgba(240,244,255,0.65);display:flex;align-items:center;gap:10px;text-align:left}
+.plan-features li::before{content:'';width:6px;height:6px;background:var(--cyan);border-radius:50%;flex-shrink:0}
+.plan-btn{width:100%;padding:16px;border:1px solid rgba(0,245,255,0.4);background:transparent;color:var(--cyan);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;font-weight:700;cursor:pointer;border-radius:4px;transition:all 0.3s}
+.plan-btn.solid{background:linear-gradient(135deg,var(--cyan),var(--blue));border:none;color:#000}
+.plan-btn:hover{box-shadow:0 0 30px rgba(0,245,255,0.3);transform:translateY(-1px)}
+
+/* EXPERIENCE */
+#experience{padding:140px 60px;text-align:center;position:relative;overflow:hidden}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:60px auto 0}
+.exp-card{background:var(--glass);border:0.5px solid var(--glass-border);border-radius:16px;padding:32px;transition:all 0.4s}
+.exp-card:hover{transform:translateY(-6px);border-color:rgba(124,58,237,0.5);box-shadow:0 20px 60px rgba(124,58,237,0.1)}
+.exp-num{font-family:'Orbitron',monospace;font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--cyan),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.exp-label{font-size:13px;color:rgba(240,244,255,0.5);letter-spacing:1px}
+
+/* FOOTER */
+footer{padding:80px 60px 40px;border-top:0.5px solid rgba(0,245,255,0.1);text-align:center}
+.footer-logo{font-family:'Orbitron',monospace;font-size:22px;font-weight:900;background:linear-gradient(90deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px}
+.footer-links{display:flex;justify-content:center;gap:36px;list-style:none;margin-bottom:40px}
+.footer-links a{color:rgba(240,244,255,0.35);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s}
+.footer-links a:hover{color:var(--cyan)}
+.social-row{display:flex;justify-content:center;gap:16px;margin-bottom:48px}
+.social-btn{width:40px;height:40px;border:0.5px solid rgba(0,245,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(240,244,255,0.4);text-decoration:none;font-size:14px;transition:all 0.3s}
+.social-btn:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 16px rgba(0,245,255,0.2)}
+.copyright{font-size:12px;color:rgba(240,244,255,0.2);letter-spacing:1px}
+
+/* GLOWS */
+.bg-glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+.glow-cyan{background:rgba(0,245,255,0.08)}
+.glow-violet{background:rgba(124,58,237,0.08)}
+.glow-blue{background:rgba(26,111,255,0.08)}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:20px 24px}
+  .nav-links{display:none}
+  #hero,#features,#showcase,#pricing,#experience{padding:100px 24px}
+  .showcase-inner{grid-template-columns:1fr;gap:40px}
+  .exp-grid{grid-template-columns:1fr}
+  footer{padding:60px 24px 32px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">NOVA X</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#showcase">Colors</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <button class="nav-cta">Buy Now</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="stars" id="stars"></div>
+
+  <div class="bg-glow glow-cyan" style="width:600px;height:600px;top:10%;left:-10%;opacity:0.6"></div>
+  <div class="bg-glow glow-violet" style="width:500px;height:500px;bottom:10%;right:-5%;opacity:0.5"></div>
+
+  <div class="energy-rings">
+    <div class="ring" style="width:320px;height:320px;border-color:rgba(0,245,255,0.2);--rd:3s;animation-delay:0s"></div>
+    <div class="ring" style="width:500px;height:500px;border-color:rgba(26,111,255,0.15);--rd:3s;animation-delay:0.8s"></div>
+    <div class="ring" style="width:700px;height:700px;border-color:rgba(124,58,237,0.1);--rd:3s;animation-delay:1.6s"></div>
+  </div>
+
+  <div class="watch-scene">
+    <div class="watch-wrap">
+      <div class="watch-body">
+        <div class="watch-strap top">
+          <div class="strap-line"></div>
+          <div class="strap-line"></div>
+          <div class="strap-line"></div>
+        </div>
+        <div class="watch-case">
+          <div class="edge-glow"></div>
+          <div class="watch-btn"></div>
+          <div class="watch-screen">
+            <div class="watch-glow"></div>
+            <div class="screen-content">
+              <div>
+                <div class="s-time" id="watch-time">10:09</div>
+                <div class="s-date">WED, APR 23</div>
+              </div>
+              <div class="s-metrics">
+                <div class="metric"><div class="metric-val">97</div><div class="metric-lbl">BPM</div></div>
+                <div class="metric"><div class="metric-val">8.2K</div><div class="metric-lbl">Steps</div></div>
+              </div>
+              <div class="s-bar"><div class="s-bar-fill"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="watch-strap bottom">
+          <div class="strap-line"></div>
+          <div class="strap-line"></div>
+        </div>
+
+        <div class="floating-ui heart"><span class="fi-icon">♥</span> 97 BPM</div>
+        <div class="floating-ui steps"><span class="fi-icon">◈</span> 8,241 Steps</div>
+        <div class="floating-ui notif"><span class="fi-icon">✉</span> 3 Messages</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-content" style="margin-top:340px">
+    <div class="hero-eyebrow">Next Generation Wearable</div>
+    <h1 class="hero-title">
+      <span>Nova X Elite</span>
+    </h1>
+    <p class="hero-sub">Redefine Time. Redefine Life.</p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">Buy Now</a>
+      <a href="#features" class="btn-ghost">Explore Features</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="bg-glow glow-blue" style="width:400px;height:400px;top:-100px;right:10%"></div>
+  <p class="section-eyebrow reveal">Engineered to Perform</p>
+  <h2 class="section-title reveal">Built for the<br>extraordinary.</h2>
+  <div class="features-grid">
+    <div class="feat-card fi-heart reveal">
+      <div class="feat-icon">♥</div>
+      <div class="feat-name">Heart Rate Monitor</div>
+      <p class="feat-desc">Continuous optical heart rate sensing with medical-grade accuracy. Real-time alerts for irregular rhythms.</p>
+      <span class="feat-tag">Health OS</span>
+    </div>
+    <div class="feat-card fi-sleep reveal" style="transition-delay:0.1s">
+      <div class="feat-icon">◑</div>
+      <div class="feat-name">Sleep Tracking</div>
+      <p class="feat-desc">Deep sleep analysis across REM, light, and deep stages. Wake up refreshed with intelligent smart alarms.</p>
+      <span class="feat-tag" style="border-color:rgba(124,58,237,0.4);color:#a78bfa">Recovery AI</span>
+    </div>
+    <div class="feat-card fi-fit reveal" style="transition-delay:0.2s">
+      <div class="feat-icon">◈</div>
+      <div class="feat-name">Fitness Modes</div>
+      <p class="feat-desc">40+ sport modes with GPS tracking, VO2 max estimation, and adaptive workout coaching on the go.</p>
+      <span class="feat-tag">Motion Pro</span>
+    </div>
+    <div class="feat-card fi-notif reveal" style="transition-delay:0.3s">
+      <div class="feat-icon">✉</div>
+      <div class="feat-name">Smart Notifications</div>
+      <p class="feat-desc">Seamless iPhone & Android sync. Reply to messages, control music, and manage your day from your wrist.</p>
+      <span class="feat-tag" style="border-color:rgba(26,111,255,0.4);color:#60a5fa">Connected</span>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section id="showcase">
+  <div class="bg-glow glow-violet" style="width:500px;height:500px;bottom:-100px;left:-100px"></div>
+  <div class="showcase-inner">
+    <div class="reveal">
+      <p class="section-eyebrow" style="text-align:left">Crafted in Three Finishes</p>
+      <div class="color-name" id="color-name" style="color:var(--cyan)">Obsidian Black</div>
+      <p class="color-desc" id="color-desc">Forged from aerospace-grade aluminium with a deep anodized finish. Born for the night.</p>
+      <div class="color-swatches">
+        <div class="cswatch obsidian active" id="sw-obsidian" onclick="setColor('obsidian')" title="Obsidian Black" style="box-shadow:0 0 0 2px var(--cyan),0 0 20px rgba(0,245,255,0.4)"></div>
+        <div class="cswatch silver" id="sw-silver" onclick="setColor('silver')" title="Stellar Silver"></div>
+        <div class="cswatch gold" id="sw-gold" onclick="setColor('gold')" title="Solar Gold"></div>
+      </div>
+    </div>
+    <div class="watch-showcase reveal" style="transition-delay:0.2s">
+      <div class="big-watch">
+        <div class="big-strap top"></div>
+        <div class="big-case case-obsidian" id="big-case">
+          <div class="big-screen">
+            <div class="bs-time" id="big-time">10:09</div>
+          </div>
+        </div>
+        <div class="big-strap bottom"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="bg-glow glow-cyan" style="width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <p class="section-eyebrow reveal">By the Numbers</p>
+  <h2 class="section-title reveal">Engineered<br>to excellence.</h2>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <div class="exp-num">7+</div>
+      <div class="exp-label">Days Battery Life</div>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.1s">
+      <div class="exp-num">40+</div>
+      <div class="exp-label">Sport Modes</div>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.2s">
+      <div class="exp-num">50m</div>
+      <div class="exp-label">Water Resistance</div>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0s">
+      <div class="exp-num">1ms</div>
+      <div class="exp-label">Sensor Response</div>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.1s">
+      <div class="exp-num">24/7</div>
+      <div class="exp-label">Health Monitoring</div>
+    </div>
+    <div class="exp-card reveal" style="transition-delay:0.2s">
+      <div class="exp-num">∞</div>
+      <div class="exp-label">Style Options</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="bg-glow glow-blue" style="width:500px;height:500px;top:-100px;right:-100px"></div>
+  <p class="section-eyebrow reveal">Choose Your Nova</p>
+  <h2 class="section-title reveal">Simple,<br>transparent pricing.</h2>
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="plan-name">Nova X</div>
+      <div class="plan-price"><sup>₹</sup>24,999</div>
+      <div class="plan-period">Standard Edition</div>
+      <ul class="plan-features">
+        <li>Heart Rate Monitor</li>
+        <li>Sleep Tracking</li>
+        <li>20+ Sport Modes</li>
+        <li>Smart Notifications</li>
+        <li>5-Day Battery</li>
+        <li>30m Water Resistance</li>
+      </ul>
+      <button class="plan-btn">Order Now</button>
+    </div>
+    <div class="price-card featured reveal" style="transition-delay:0.15s">
+      <div class="plan-name">Nova X Elite</div>
+      <div class="plan-price"><sup>₹</sup>39,999</div>
+      <div class="plan-period">Premium Edition</div>
+      <ul class="plan-features">
+        <li>Advanced ECG Monitor</li>
+        <li>AI Sleep Coach</li>
+        <li>40+ Sport Modes + GPS</li>
+        <li>Full Smart Notifications</li>
+        <li>7-Day Battery</li>
+        <li>50m Water Resistance</li>
+        <li>Sapphire Crystal Display</li>
+        <li>Premium Bands Included</li>
+      </ul>
+      <button class="plan-btn solid">Order Now</button>
+    </div>
+    <div class="price-card reveal" style="transition-delay:0.3s">
+      <div class="plan-name">Nova X Ultra</div>
+      <div class="plan-price"><sup>₹</sup>54,999</div>
+      <div class="plan-period">Ultimate Edition</div>
+      <ul class="plan-features">
+        <li>Full Health Suite</li>
+        <li>Blood Oxygen Monitor</li>
+        <li>Titanium Case</li>
+        <li>Cellular Connectivity</li>
+        <li>10-Day Battery</li>
+        <li>100m Water Resistance</li>
+        <li>Exclusive Colorways</li>
+      </ul>
+      <button class="plan-btn">Order Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">NOVA X ELITE</div>
+  <ul class="footer-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Support</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Press</a></li>
+    <li><a href="#">Privacy</a></li>
+  </ul>
+  <div class="social-row">
+    <a href="#" class="social-btn" title="Twitter">✕</a>
+    <a href="#" class="social-btn" title="Instagram">◈</a>
+    <a href="#" class="social-btn" title="YouTube">▶</a>
+    <a href="#" class="social-btn" title="LinkedIn">in</a>
+  </div>
+  <p class="copyright">© 2026 Nova X Elite. All rights reserved. Time reimagined.</p>
+</footer>
+
+<script>
+// Cursor
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing();
+document.querySelectorAll('button,a,.cswatch,.feat-card,.price-card,.exp-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='6px';cursor.style.height='6px';ring.style.width='52px';ring.style.height='52px'});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px'});
+});
+
+// Stars
+const starsEl=document.getElementById('stars');
+for(let i=0;i<180;i++){
+  const s=document.createElement('div');
+  const sz=Math.random()*2+0.5;
+  s.className='star';
+  s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${2+Math.random()*4}s;--delay:${Math.random()*4}s`;
+  starsEl.appendChild(s);
+}
+
+// Live time
+function updateTime(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const t=h+':'+m;
+  const el=document.getElementById('watch-time');
+  const el2=document.getElementById('big-time');
+  if(el)el.textContent=t;
+  if(el2)el2.textContent=t;
+}
+updateTime();setInterval(updateTime,1000);
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Color switcher
+const colors={
+  obsidian:{name:'Obsidian Black',desc:'Forged from aerospace-grade aluminium with a deep anodized finish. Born for the night.',cls:'case-obsidian',color:'var(--cyan)',glow:'rgba(0,245,255,0.4)'},
+  silver:{name:'Stellar Silver',desc:'Polished to mirror perfection. A timeless finish for those who command attention.',cls:'case-silver',color:'#c0c8d8',glow:'rgba(192,200,216,0.4)'},
+  gold:{name:'Solar Gold',desc:'24k PVD gold coating over aerospace aluminium. Rare, precious, and utterly commanding.',cls:'case-gold',color:'#d4a843',glow:'rgba(212,168,67,0.5)'}
+};
+function setColor(key){
+  const c=colors[key];
+  const bc=document.getElementById('big-case');
+  bc.className='big-case '+c.cls;
+  document.getElementById('color-name').textContent=c.name;
+  document.getElementById('color-name').style.color=c.color;
+  document.getElementById('color-desc').textContent=c.desc;
+  ['obsidian','silver','gold'].forEach(k=>{
+    const sw=document.getElementById('sw-'+k);
+    sw.classList.toggle('active',k===key);
+    sw.style.boxShadow=k===key?`0 0 0 2px ${colors[k].color},0 0 20px ${colors[k].glow}`:'';
+  });
+}
+
+// Parallax
+document.addEventListener('mousemove',e=>{
+  const x=(e.clientX/window.innerWidth-0.5)*20;
+  const y=(e.clientY/window.innerHeight-0.5)*20;
+  const ws=document.querySelector('.watch-scene');
+  if(ws)ws.style.transform=`translate(calc(-50% + ${x*0.3}px), calc(-50% + ${y*0.3}px))`;
+});
+</script>
+</body>
+</html>
